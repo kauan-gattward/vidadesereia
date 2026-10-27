@@ -12,7 +12,7 @@
   /* ---------- loader ---------- */
   function initLoader() {
     var loader = $('#loader'), pct = $('#pct'), done = false;
-    var imgs = $$('img').filter(function (i) { return !i.loading || i.loading !== 'lazy'; });
+    var imgs = $$('img').filter(function (i) { return i.loading !== 'lazy' && i.id !== 'lbimg'; });
     var n = 0, total = Math.max(imgs.length, 1);
     function tick() { n++; if (pct) pct.textContent = Math.min(100, Math.round(n / total * 100)) + '%'; }
     imgs.forEach(function (i) { if (i.complete) tick(); else { i.addEventListener('load', tick); i.addEventListener('error', tick); } });
@@ -183,6 +183,7 @@
       cap.textContent = b.getAttribute('data-cap') || '';
     }
     function open(i) {
+      if (isOpen) return;
       opener = document.activeElement; show(i); lb.hidden = false; lb.classList.add('open'); isOpen = true; lock();
       history.pushState({ lb: true }, ''); $('.x', lb).focus();
     }
@@ -238,7 +239,7 @@
       'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}',
       'void main(){vec2 uv=gl_FragCoord.xy/r;float hz=.42;vec2 sp=r.x<r.y?vec2(.78,.9):vec2(.68,.62);',
       'vec3 sky=mix(vec3(1.,.42,.29),vec3(1.,.74,.42),smoothstep(hz,1.,uv.y));sky=mix(sky,vec3(.71,.27,.11),smoothstep(.75,1.,uv.y)*.6);',
-      'float d=length((uv-sp)*vec2(r.x/r.y,1.));vec3 col=sky+vec3(1.,.85,.5)*(.25/(d*8.+.3))*.6;col+=vec3(1.,.95,.75)*smoothstep(.09,.07,d);',
+      'float d=length((uv-sp)*vec2(r.x/r.y,1.));vec3 col=sky+vec3(1.,.85,.5)*(.25/(d*8.+.3))*.6;col=mix(col,vec3(1.,.82,.45),smoothstep(.09,.07,d));',
       'if(uv.y<hz){float y=(hz-uv.y);vec2 q=vec2(uv.x*r.x/r.y*(1.+y*3.),1./(y+.02));float w=fbm(q*vec2(3.,.5)+vec2(t*.05,-t*.6));',
       'vec3 sea=mix(vec3(.04,.43,.42),vec3(.02,.15,.16),smoothstep(0.,hz,y));',
       'float g=smoothstep(.55,1.,w)*exp(-pow((uv.x-sp.x)*(3.-y*3.),2.)*6.);sea+=vec3(1.,.8,.45)*g*1.4;sea+=vec3(.2,.5,.5)*w*.15;col=sea;}',
@@ -266,13 +267,13 @@
     window.addEventListener('resize', function () { size(); draw(performance.now()); });
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; start(); }).observe(c);
     document.addEventListener('visibilitychange', start);
-    c.addEventListener('webglcontextlost', function (e) { e.preventDefault(); cancelAnimationFrame(raf); raf = 0; visible = false; });
+    c.addEventListener('webglcontextlost', function (e) { e.preventDefault(); cancelAnimationFrame(raf); raf = 0; visible = false; c.classList.add('lost'); });
   }
 
   /* ---------- pause CSS animations offscreen / hidden tab ---------- */
   function initPause() {
     var els = $$('.marquee, .badge');
-    function vis() { doc.classList.toggle('paused-all', document.hidden); els.forEach(function (e) { e.classList.toggle('paused', document.hidden || e.dataset.off === '1'); }); }
+    function vis() { els.forEach(function (e) { e.classList.toggle('paused', document.hidden || e.dataset.off === '1'); }); }
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (en) { en.forEach(function (x) { x.target.dataset.off = x.isIntersecting ? '0' : '1'; }); vis(); });
       els.forEach(function (e) { io.observe(e); });
