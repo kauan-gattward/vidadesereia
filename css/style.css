@@ -241,3 +241,17 @@ footer h3{font-size:1.1rem;font-family:var(--fb);letter-spacing:.15em;text-trans
 .card .ph img.top{object-position:50% 0}
 .mwrap{overflow:hidden;position:relative;z-index:5;padding:1.6rem 0;margin:-1.6rem 0}
 main{overflow-x:hidden;overflow-x:clip}
+.solo{display:grid;grid-template-columns:1.5fr .8fr;gap:1.6rem;align-items:center;perspective:1200px}
+.card.feature{display:grid;grid-template-columns:1fr 1fr}
+.card.feature .ph{aspect-ratio:auto;min-height:100%}
+.card.feature .body{padding:2rem;justify-content:center}
+.card.feature h3{font-size:clamp(1.8rem,1.2rem + 2vw,2.8rem)}
+.promo{margin:0;transform:rotate(3deg)}
+.promo button{all:unset;cursor:zoom-in;display:block;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -25px rgba(0,0,0,.6)}
+.promo button:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.promo img{width:100%;aspect-ratio:9/14;object-fit:cover;object-position:50% 0}
+.promo figcaption{position:static;background:none;backdrop-filter:none;color:var(--sand);font-size:.85rem;padding:.8rem .2rem 0;text-align:center}
+.ba .wide{grid-column:1/-1}.ba .wide img{aspect-ratio:16/9}
+@media (max-width:900px){.solo{grid-template-columns:1fr}.promo{max-width:320px;margin-inline:auto}}
+@media (max-width:640px){.card.feature{grid-template-columns:1fr}.card.feature .ph{aspect-ratio:4/5}.card.feature .body{padding:1.4rem}}
+.card.feature ul{font-size:1rem}

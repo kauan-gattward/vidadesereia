@@ -21,7 +21,7 @@ Nenhum WhatsApp público foi encontrado. A bio diz “📩 Pedidos no direct”,
 - Bio, nome e logo: perfil TikTok oficial @vidadesereiaitacare (mesmo @ do Instagram). O Instagram bloqueou o acesso sem login (rate limit).
 - Instagram (og tags): 1.311 seguidores, 48 posts.
 - Preço R$ 25 do bronzeador e benefícios (óleos naturais e urucum, hidrata, pele dourada, fácil de aplicar): post “Combo perfeito pro feriado” da marca.
-- “Marquinha de fita”: hashtag #maquinhadefita usada pela marca. Preço não divulgado (“Consulte”).
+- Produto único: Bronzeador Natural (R$ 25), usado com biquíni normal; a marquinha vem do próprio biquíni (correção confirmada pela marca).
 - Fotos: capas dos posts oficiais da marca (autorizadas pela dona).
 
 ## Imagens
